@@ -17,15 +17,14 @@ class App extends Component {
   };
 
   handleChange = event => {
-    const val = event.target.value;
-    this.setState({ newsInput: val });
+    this.setState({newsInput: event.target.value});
     // console.log(val);
   };
 
   handleKeyDown = event=> {
     if (event.keyCode === 13) {
       const { newsInput, news } = this.state;
-      const newPost = { value: newsInput, id: getId() };
+      const newPost = { text: newsInput, id: getId() };
 
       this.setState({
         newsInput: "",
@@ -36,7 +35,8 @@ class App extends Component {
 
   render() {
     const { newsInput, news} = this.state;
-    return <div className="App">
+    return (
+      <div className="App">
         <input 
           value={newsInput} 
           onChange={this.handleChange} 
@@ -47,7 +47,8 @@ class App extends Component {
               <NewsPost text={item.text} key={item.id}/>
           )}
         </div>
-      </div>;
+      </div>
+    );
   }
 }
 
