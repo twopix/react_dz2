@@ -42,7 +42,7 @@ class NewsPost extends Component {
   render() {
     const { commentInput, comments } = this.state;
     return <div className="news-post">
-        <h4>{this.props.text}</h4>
+        <p>{this.props.text}</p>
         <div>
           {comments.map(comment => (
             <Comment
