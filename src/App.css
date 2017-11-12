@@ -28,16 +28,16 @@
   to { transform: rotate(360deg); }
 }
 
-.todo-container {
+.news-container {
   padding: 12px 0;
 }
 
 
-.todo {
+.news {
   padding: 6px 0;
 }
 
-.todo-input {
+.news-input {
   border-radius: 3px;
   border: 1px solid #eee;
   padding: 4px 6px;

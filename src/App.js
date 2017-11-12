@@ -1,56 +1,53 @@
-import React, {Component,PureComponent} from 'react';
+import React, {Component} from 'react';
 import "./App.css"
+import NewsPost from "./NewsPost.js";
 
+let id = 0;
 
-class NewsPost extends Component {
-  render() {
-    const posts = [
-      { text: "hello!", author: "Bill" },
-      { text: "How are you?", author: "Mary" }
-    ];
-    return (
-      <ul>
-        {posts.map(post => {
-          return <post author={post.author} text={post.text} />;
-        })}
-      </ul>
-    );
-  }
+function getId() {
+  id += 1;
+  return id;
 }
 
-class App extends PureComponent {
+
+class App extends Component {
   state = {
-    inputValue: ""
+    newsInput: "",
+    news: []
   };
 
   handleChange = event => {
     const val = event.target.value;
-    this.setState({ inputValue: val });
+    this.setState({ newsInput: val });
     // console.log(val);
   };
 
   handleKeyDown = event=> {
-    // console.log(event.keyCode);
     if (event.keyCode === 13) {
-      this.setState({inputValue: ''})
+      const { newsInput, news } = this.state;
+      const newPost = { value: newsInput, id: getId() };
+
+      this.setState({
+        newsInput: "",
+        news: [...news, newPost]
+      });
     }
   };
 
   render() {
-    const { inputValue } = this.state;
-    return (
-      <div className="App">
-        <input
-          value={inputValue}
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
-          className="input"
-        />
+    const { newsInput, news} = this.state;
+    return <div className="App">
+        <input 
+          value={newsInput} 
+          onChange={this.handleChange} 
+          onKeyDown={this.handleKeyDown} 
+          className="news-input" />
         <div className="Posts">
-          <NewsPost />
+          {news.map(item => 
+              <NewsPost text={item.text} key={item.id}/>
+          )}
         </div>
-      </div>
-    );
+      </div>;
   }
 }
 
